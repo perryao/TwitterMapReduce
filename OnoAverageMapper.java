@@ -38,7 +38,6 @@ public class OnoAverageMapper  extends Mapper<LongWritable, Text, Text, LongWrit
 	//context.write(new Text(String.format("%s 12am-1am", dayOfWeek)), new LongWritable(1));
 	public static String timeRange(String timeString,String day) {
 		int hour;
-		int min;
 		if(timeString.substring(0).equalsIgnoreCase("0") && !timeString.substring(1).equalsIgnoreCase("0")) {
 			//Is it 1am-9am?
 			hour = Integer.parseInt(timeString.substring(1));
@@ -110,7 +109,7 @@ public class OnoAverageMapper  extends Mapper<LongWritable, Text, Text, LongWrit
 				String dayOfWeek = fullDayFromAbbreviation(createdAt.substring(0,3));
 				String time = createdAt.substring(11,16);
 				context.write(new Text(timeRange(time,dayOfWeek)), new LongWritable(1));
-				context.write(new Text(String.format("Number of %s", dayOfWeek)), new LongWritable(1));
+				context.write(new Text(String.format("#%s", dayOfWeek)), new LongWritable(1));
 
 			}
 
